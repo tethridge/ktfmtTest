@@ -23,9 +23,7 @@ class ComposeActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            AppMain()
-        }
+        setContent { AppMain() }
     }
 }
 
@@ -44,11 +42,11 @@ fun AppMain() {
             backgroundColor = MaterialTheme.colors.background
         ) {
             Box(
-                modifier = Modifier
-                    .padding(it)
-                    .fillMaxSize()
-                    .wrapContentSize(align = Alignment.Center)
-                    .padding(horizontal = 8.dp)
+                modifier =
+                    Modifier.padding(it)
+                        .fillMaxSize()
+                        .wrapContentSize(align = Alignment.Center)
+                        .padding(horizontal = 8.dp)
             ) {
                 Factorial()
             }

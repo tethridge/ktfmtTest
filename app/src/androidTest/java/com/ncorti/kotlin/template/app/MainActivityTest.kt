@@ -17,8 +17,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
-    @get:Rule
-    val rule = activityScenarioRule<MainActivity>()
+    @get:Rule val rule = activityScenarioRule<MainActivity>()
 
     @Test
     fun typeANumber_resultIsDisplayed() {

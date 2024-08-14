@@ -18,20 +18,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonCompute.setOnClickListener {
-            val message = if (binding.editTextFactorial.text.isNotEmpty()) {
-                val input = binding.editTextFactorial.text.toString().toLong()
-                val result = try {
-                    FactorialCalculator.computeFactorial(input).toString()
-                } catch (ex: IllegalStateException) {
-                    "Error: ${ex.message}"
-                }
+            val message =
+                if (binding.editTextFactorial.text.isNotEmpty()) {
+                    val input = binding.editTextFactorial.text.toString().toLong()
+                    val result =
+                        try {
+                            FactorialCalculator.computeFactorial(input).toString()
+                        } catch (ex: IllegalStateException) {
+                            "Error: ${ex.message}"
+                        }
 
-                binding.textResult.text = result
-                binding.textResult.visibility = View.VISIBLE
-                getString(R.string.notification_title, result)
-            } else {
-                getString(R.string.please_enter_a_number)
-            }
+                    binding.textResult.text = result
+                    binding.textResult.visibility = View.VISIBLE
+                    getString(R.string.notification_title, result)
+                } else {
+                    getString(R.string.please_enter_a_number)
+                }
             ToastUtil.showToast(this, message)
         }
 

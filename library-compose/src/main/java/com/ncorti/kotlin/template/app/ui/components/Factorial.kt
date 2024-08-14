@@ -25,8 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ncorti.kotlin.template.library.FactorialCalculator
-import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
+import kotlinx.coroutines.launch
 
 @Suppress("LongMethod")
 @Composable
@@ -35,14 +35,8 @@ fun Factorial(modifier: Modifier = Modifier) {
     var factorialResult by remember { mutableStateOf<Long?>(null) }
     var showFactorialError by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = "This is just a template",
-            style = MaterialTheme.typography.h6
-        )
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(text = "This is just a template", style = MaterialTheme.typography.h6)
         Text(
             text = "You can compute a factorial using the library-kotlin module.",
             style = MaterialTheme.typography.body1
@@ -50,12 +44,8 @@ fun Factorial(modifier: Modifier = Modifier) {
         TextField(
             value = textFieldState,
             label = { Text(text = "Insert a number to compute the factorial") },
-            onValueChange = {
-                textFieldState = it
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .testTag("Input"),
+            onValueChange = { textFieldState = it },
+            modifier = Modifier.fillMaxWidth().testTag("Input"),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         if (showFactorialError) {
@@ -67,9 +57,7 @@ fun Factorial(modifier: Modifier = Modifier) {
         }
         AnimatedVisibility(
             visible = factorialResult != null,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .align(alignment = Alignment.End)
+            modifier = Modifier.padding(top = 8.dp).align(alignment = Alignment.End)
         ) {
             Text(
                 text = "$factorialResult",
@@ -78,9 +66,7 @@ fun Factorial(modifier: Modifier = Modifier) {
             )
         }
         Button(
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .align(alignment = Alignment.End),
+            modifier = Modifier.padding(top = 8.dp).align(alignment = Alignment.End),
             onClick = {
                 scope.launch {
                     @Suppress("SwallowedException")
@@ -102,7 +88,5 @@ fun Factorial(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun FactorialPreview() {
-    MaterialTheme {
-        Factorial()
-    }
+    MaterialTheme { Factorial() }
 }

@@ -13,19 +13,14 @@ import org.junit.Rule
 import org.junit.Test
 
 class FactorialTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     @Test
     fun useAppContext() {
-        composeTestRule.setContent {
-            Factorial()
-        }
+        composeTestRule.setContent { Factorial() }
 
         composeTestRule.onNodeWithTag("Input").performClick().performTextInput("5")
         composeTestRule.onNodeWithText("COMPUTE").performClick()
-        composeTestRule.onNodeWithTag("FactorialResult")
-            .assertIsDisplayed()
-            .assert(hasText("120"))
+        composeTestRule.onNodeWithTag("FactorialResult").assertIsDisplayed().assert(hasText("120"))
     }
 }

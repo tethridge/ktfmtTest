@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+echo "Running Kotlin formatting check on staged files..."
+STAGED_FILES=`git diff --name-only --cached --diff-filter=AMd`
+STAGED_FILES_DELIMITED=`git diff --name-only --cached --diff-filter=AMd | paste -sd "," -`
+echo "$STAGED_FILES"
+
+./gradlew ktfmtPrecommitCheck --include-only=$STAGED_FILES_DELIMITED
+#./gradlew ktfmtPrecommitCheck
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "Formatting check failed, performing format on staged files..."
+    ./gradlew ktfmtPrecommitFormat --include-only=$STAGED_FILES_DELIMITED
+#    ./gradlew ktfmtPrecommitFormat
+    echo "**************************************************************************"
+    echo "* FOUND IMPROPERLY FORMATTED FILES - ktfmtFormat was run.                *"
+    echo "* Check results for accuracy, add changed files, and commit again.       *"
+    echo "**************************************************************************"
+git status
+fi
+
+echo "Exit code: $EXIT_CODE"
+exit $EXIT_CODE

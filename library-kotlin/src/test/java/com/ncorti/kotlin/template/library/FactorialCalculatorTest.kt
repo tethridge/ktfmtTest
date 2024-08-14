@@ -1,11 +1,11 @@
 package com.ncorti.kotlin.template.library
 
 import com.ncorti.kotlin.template.library.FactorialCalculator.computeFactorial
+import java.lang.Exception
+import java.lang.IllegalStateException
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Test
-import java.lang.Exception
-import java.lang.IllegalStateException
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -16,9 +16,7 @@ class FactorialCalculatorTest {
 
     @Test
     fun computeFactorial_withNegative_raiseException() {
-        assertThrows(Exception::class.java) {
-            computeFactorial(-1)
-        }
+        assertThrows(Exception::class.java) { computeFactorial(-1) }
     }
 
     @Test

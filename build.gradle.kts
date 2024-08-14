@@ -1,4 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import com.ncorti.ktfmt.gradle.tasks.*
 
 plugins {
     id("com.android.application") apply false
@@ -6,6 +7,7 @@ plugins {
     kotlin("android") apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.versions)
+    alias(libs.plugins.ktfmt) apply true
     cleanup
     base
 }
@@ -36,4 +38,19 @@ tasks {
             candidate.version.isStableVersion().not()
         }
     }
+}
+
+ktfmt {
+    // KotlinLang style - 4 space indentation - From kotlinlang.org/docs/coding-conventions.html
+    kotlinLangStyle()
+}
+
+tasks.register<KtfmtCheckTask>("ktfmtPrecommitCheck") {
+    source = project.fileTree(rootDir)
+    include("**/*.kt")
+}
+
+tasks.register<KtfmtFormatTask>("ktfmtPrecommitFormat") {
+    source = project.fileTree(rootDir)
+    include("**/*.kt")
 }
